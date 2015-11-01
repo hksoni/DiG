@@ -1,0 +1,89 @@
+# ***** BEGIN LICENSE BLOCK *****
+# DiG: Data centers in the Grid
+# Copyright (C) 2015-2016, INRIA.
+# 
+# This work was partially supported by the ANR Reflexion Project (ANR-14-CE28-0019).
+# The authors alone are responsible for this work.
+#
+# See the file AUTHORS for details and contact information.
+# 
+# This file is part of DiG (Data centers in the Grid Tool).
+#
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License Version 3 or later
+# (the "GPL"), or the GNU Lesser General Public License Version 3 or later
+# (the "LGPL") as published by the Free Software Foundation.
+#
+# DiG is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+# or the GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License and
+# GNU Lesser General Public License along with DiG; see the file
+# COPYING. If not, see <http://www.gnu.org/licenses/>.
+#
+# ***** END LICENSE BLOCK ***** */
+#Author: Hardik Soni <hardik.soni@inria.fr>
+
+#!/usr/bin/expect -f
+
+set username "root"
+set password "diana" 
+set pyscript "delete-vne.py"
+
+set host_list_file [lindex $argv 0]
+
+if {![file exists $host_list_file]} {
+    puts "file doesnt exist"
+    return
+}
+
+set f [open $host_list_file]
+set lines [split [read $f] "\n"]
+close $f
+
+set len [llength $lines]
+puts $len
+foreach line $lines {
+    if {$line eq ""} { 
+	continue
+    }
+    set host_file [split $line " "]
+    set host [lindex $host_file 0]
+    set filePath [lindex $host_file 1]	
+    set path_split [split $filePath "/"]
+    set filename [lindex $path_split [llength $path_split]-1]	
+    spawn scp $filePath $pyscript $username@$host:~/    
+    expect {
+    	-re ".*es.*o.*" {
+	exp_send "yes\r"
+	exp_continue
+	}
+	-re ".*sword.*" {
+	exp_send "$password\r"
+	exp_continue
+	}
+	".*# "{
+	send "\r"	
+	}
+    }
+
+    spawn ssh $username@$host
+    expect {
+	-re ".*sword.*" {
+	exp_send "$password\r"
+	exp_continue
+	}
+	".*# "{
+	send "\r"	
+	}
+    }
+    
+    send "nohup python $pyscript $filename  >  delete-vne.out 2>&1&\r"
+    expect ".*# "
+    send "\r"	
+    expect ".*# "
+    send "exit\r"
+    expect eof
+}
