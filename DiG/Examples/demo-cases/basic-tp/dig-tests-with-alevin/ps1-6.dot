@@ -1,0 +1,15 @@
+graph G {
+physwitch[cpu=0];
+ps1[cpu=0 ip="172.16.97.1" type=manager];
+ps2[cpu=14 ip="172.16.97.2" container="460,180" disk1="sdb,550,190"];
+ps3[cpu=14 ip="172.16.97.3" container="460,180" disk1="sdb,550,190"];
+ps4[cpu=14 ip="172.16.97.4" container="460,180" disk1="sdb,550,190"];
+ps5[cpu=14 ip="172.16.97.5" container="460,180" disk1="sdb,550,190"];
+ps6[cpu=14 ip="172.16.97.6" container="460,180" disk1="sdb,550,190"];
+physwitch--ps1 [bandwidth=2000];
+physwitch--ps2 [bandwidth=2000];
+physwitch--ps3 [bandwidth=2000];
+physwitch--ps4 [bandwidth=2000];
+physwitch--ps5 [bandwidth=2000];
+physwitch--ps6 [bandwidth=2000];
+}            y

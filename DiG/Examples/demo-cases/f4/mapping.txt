@@ -1,0 +1,5 @@
+ps12 - H1, H2, H3, H4, Pod1Ag1,  Pod1Ed1, Pod1Ed2
+ps13 - H5, H6, H7, H8, Pod2Ag1, Pod2Ed2, Pod2Ed1
+ps14 - H9, H10, H11, H12, Pod3Ag1, Pod3Ed2, Pod3Ed1
+ps15 - H13, H14, H15, H16, Pod4Ed1, Pod4Ed2, Pod4Ag1
+ps16 - Pod1Ag2, Cs0, Pod2Ag2, Cs1, Pod3Ag2, Cs2, Pod4Ag2, Cs3

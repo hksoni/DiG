@@ -1,0 +1,24 @@
+graph G {
+vs1[cpu=2 type=switch];
+vs2[cpu=2 type=switch];
+vs3[cpu=2 type=switch];
+vs4[cpu=2 type=switch];
+vs5[cpu=2 type=switch];
+vh1[cpu=2 type=host hadoop=namenode];
+vh2[cpu=2 type=host hadoop=resourcemanager];
+vh3[cpu=2 type=host];
+vh4[cpu=2 type=host];
+vh5[cpu=2 type=host];
+vs1--vh1 [bandwidth=100];
+vs2--vh2 [bandwidth=100];
+vs3--vh3 [bandwidth=100];
+vs4--vh4 [bandwidth=100];
+vs5--vh5 [bandwidth=100];
+vs1--vs2 [bandwidth=100];
+vs1--vs3 [bandwidth=100];
+vs1--vs4 [bandwidth=100];
+vs2--vs4 [bandwidth=100];
+vs2--vs5 [bandwidth=100];
+vs3--vs4 [bandwidth=100];
+vs4--vs5 [bandwidth=100];
+}

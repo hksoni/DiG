@@ -1,0 +1,14 @@
+graph G {
+Switch0[cpu=0 ip=""];
+ps11[cpu=15 ip="172.16.97.11" type=manager container="460,190" disk1="sdb,558,190"];
+ps12[cpu=15 ip="172.16.97.12" container="460,190" disk1="sdb,558,190"];
+ps13[cpu=15 ip="172.16.97.13" container="460,190" disk1="sdb,558,190"];
+ps14[cpu=15 ip="172.16.97.14" container="460,190" disk1="sdb,558,190"];
+ps15[cpu=15 ip="172.16.97.15" container="460,190" disk1="sdb,558,190"];
+ps16[cpu=15 ip="172.16.97.16" container="460,190" disk1="sdb,558,190"];
+Switch0--ps11 [bandwidth=2000];
+Switch0--ps12 [bandwidth=2000];
+Switch0--ps13 [bandwidth=2000];
+Switch0--ps14 [bandwidth=2000];
+Switch0--ps15 [bandwidth=2000];
+Switch0--ps16 [bandwidth=2000];
